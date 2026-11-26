@@ -44,6 +44,19 @@ function _groveOptions(profile, role) {
     case 'uart':
       // Grove-UART: TX = weißes Kabel (pin1), RX = gelbes Kabel (signal).
       return _twoPinPorts(profile).filter(p => _uartPortOk(profile, p)).map(p => [p.label, String(p.id)]);
+    case 'strip': {
+      // LED-Streifen: wie 'digital', dazu die Servo-Anschlüsse mit Namen
+      // (Werte bleiben Pin-Namen, alte Projekte passen weiter).
+      const used = new Set(_digitalPorts(profile).map(p => p.signal));
+      const servo = Object.entries(profile.servos || {}).filter(([, pin]) => !used.has(pin));
+      servo.forEach(([, pin]) => used.add(pin));
+      const extraPins = profile.allGrovePins.filter(p => !used.has(p));
+      return [
+        ..._digitalPorts(profile).map(p => [p.label, p.signal]),
+        ...(servo.length ? [GROVE_SEP, ...servo.map(([s, pin]) => [`Servo ${s} (${pin})`, pin])] : []),
+        ...(extraPins.length ? [GROVE_SEP, ...extraPins.map(p => [p, p])] : []),
+      ];
+    }
     case 'digital':
     default: {
       const usedSignals = new Set(profile.grovePorts.map(p => p.signal));

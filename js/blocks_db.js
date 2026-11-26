@@ -1,6 +1,6 @@
 // js/blocks_db.js – GENERIERT von scripts/build_blocks.js
 // Nicht manuell bearbeiten! Neu generieren: node scripts/build_blocks.js
-// Generiert: 2026-11-26T10:26:54.785Z
+// Generiert: 2026-11-26T10:41:47.630Z
 
 const BLOCKS_CATALOG = {
   "categories": [
@@ -2707,7 +2707,7 @@ const BLOCKS_DB = [
         "label_en": "brightness  port:",
         "name": "PORT",
         "fieldType": "grove_dropdown",
-        "groveRole": "digital"
+        "groveRole": "strip"
       }
     ],
     "valueInputs": [
@@ -2738,6 +2738,271 @@ const BLOCKS_DB = [
     "doc_en": "# External NeoPixel strip – brightness\n\nSets the brightness of a WS2812B strip connected to a Grove port (0 % = off, 100 % = full brightness).\n\"Total LEDs\" must be set to the same value for all strip blocks on the same port."
   },
   {
+    "id": "neopixel_ext_effect_forever",
+    "blockCategory": "Lichter",
+    "component": "neopixel_strip",
+    "subCategory": "Streifen",
+    "label": "Streifen-Effekt endlos",
+    "label_en": "Strip effect forever",
+    "colour": "#EC4899",
+    "tooltip": "Startet einen LED-Effekt, der läuft, bis er gestoppt wird. Das Programm läuft dabei weiter.",
+    "tooltip_en": "Starts an LED effect that runs until it is stopped. The program keeps running meanwhile.",
+    "blockType": "statement",
+    "inline": false,
+    "inputs": [
+      {
+        "label": "endlos",
+        "label_en": "forever",
+        "name": "EFFECT",
+        "fieldType": "options_dropdown",
+        "options": [
+          {
+            "label": "Komet",
+            "label_en": "Comet",
+            "value": "komet"
+          },
+          {
+            "label": "Lauflicht",
+            "label_en": "Chase",
+            "value": "lauflicht"
+          },
+          {
+            "label": "Blinken",
+            "label_en": "Blink",
+            "value": "blinken"
+          },
+          {
+            "label": "Pulsieren",
+            "label_en": "Pulse",
+            "value": "pulsieren"
+          },
+          {
+            "label": "Regenbogen",
+            "label_en": "Rainbow",
+            "value": "regenbogen"
+          }
+        ]
+      },
+      {
+        "label": "Port:",
+        "label_en": "port:",
+        "name": "PORT",
+        "fieldType": "grove_dropdown",
+        "groveRole": "strip"
+      },
+      {
+        "label": "Farbe:",
+        "label_en": "colour:",
+        "name": "COLOR",
+        "fieldType": "colour_picker",
+        "default": "#ff0000",
+        "newRow": true
+      },
+      {
+        "label": "Tempo:",
+        "label_en": "speed:",
+        "name": "SPEED",
+        "fieldType": "options_dropdown",
+        "options": [
+          {
+            "label": "schnell",
+            "label_en": "fast",
+            "value": "3"
+          },
+          {
+            "label": "sehr schnell",
+            "label_en": "very fast",
+            "value": "4"
+          },
+          {
+            "label": "mittel",
+            "label_en": "medium",
+            "value": "2"
+          },
+          {
+            "label": "langsam",
+            "label_en": "slow",
+            "value": "1"
+          }
+        ]
+      }
+    ],
+    "valueInputs": [
+      {
+        "name": "COUNT",
+        "label": "LEDs gesamt",
+        "label_en": "total LEDs",
+        "check": "Number",
+        "defaultValue": 20
+      }
+    ],
+    "hardware": {
+      "commonName": "NeoPixel-Streifen (extern) / WS2812B",
+      "verbrauch3j": 0,
+      "kitStandard": false
+    },
+    "legacyGenerator": true,
+    "_file": "actuators/neopixel_ext_effect_forever.md",
+    "doc": "# LED-Streifen – Effekt endlos\n\nStartet einen Effekt, der immer weiter läuft – bis „Effekt stoppen“, ein anderer Effekt oder ein anderer Streifen-Block am selben Port kommt.\nDer Block wartet nicht. Er darf auch in FÜR IMMER stehen.",
+    "doc_en": "# LED strip – effect forever\n\nStarts an effect that keeps running – until “stop effect”, another effect or another strip block on the same port.\nThe block does not wait. It may also be placed inside FOREVER."
+  },
+  {
+    "id": "neopixel_ext_effect_play",
+    "blockCategory": "Lichter",
+    "component": "neopixel_strip",
+    "subCategory": "Streifen",
+    "label": "Streifen-Effekt abspielen",
+    "label_en": "Play strip effect",
+    "colour": "#EC4899",
+    "tooltip": "Spielt einen LED-Effekt einige Male ab, danach geht der Streifen aus. Das Programm läuft dabei weiter.",
+    "tooltip_en": "Plays an LED effect a few times, then the strip turns off. The program keeps running meanwhile.",
+    "blockType": "statement",
+    "inline": false,
+    "inputs": [
+      {
+        "label": "abspielen",
+        "label_en": "play",
+        "name": "EFFECT",
+        "fieldType": "options_dropdown",
+        "options": [
+          {
+            "label": "Komet",
+            "label_en": "Comet",
+            "value": "komet"
+          },
+          {
+            "label": "Lauflicht",
+            "label_en": "Chase",
+            "value": "lauflicht"
+          },
+          {
+            "label": "Blinken",
+            "label_en": "Blink",
+            "value": "blinken"
+          },
+          {
+            "label": "Pulsieren",
+            "label_en": "Pulse",
+            "value": "pulsieren"
+          },
+          {
+            "label": "Regenbogen",
+            "label_en": "Rainbow",
+            "value": "regenbogen"
+          }
+        ]
+      },
+      {
+        "label": "Port:",
+        "label_en": "port:",
+        "name": "PORT",
+        "fieldType": "grove_dropdown",
+        "groveRole": "strip"
+      },
+      {
+        "label": "Farbe:",
+        "label_en": "colour:",
+        "name": "COLOR",
+        "fieldType": "colour_picker",
+        "default": "#ff0000",
+        "newRow": true
+      },
+      {
+        "label": "Tempo:",
+        "label_en": "speed:",
+        "name": "SPEED",
+        "fieldType": "options_dropdown",
+        "options": [
+          {
+            "label": "schnell",
+            "label_en": "fast",
+            "value": "3"
+          },
+          {
+            "label": "sehr schnell",
+            "label_en": "very fast",
+            "value": "4"
+          },
+          {
+            "label": "mittel",
+            "label_en": "medium",
+            "value": "2"
+          },
+          {
+            "label": "langsam",
+            "label_en": "slow",
+            "value": "1"
+          }
+        ]
+      }
+    ],
+    "valueInputs": [
+      {
+        "name": "COUNT",
+        "label": "LEDs gesamt",
+        "label_en": "total LEDs",
+        "check": "Number",
+        "defaultValue": 20
+      },
+      {
+        "name": "TIMES",
+        "label": "wie oft (mal)",
+        "label_en": "repeat (times)",
+        "check": "Number",
+        "defaultValue": 2
+      }
+    ],
+    "hardware": {
+      "commonName": "NeoPixel-Streifen (extern) / WS2812B",
+      "verbrauch3j": 0,
+      "kitStandard": false
+    },
+    "legacyGenerator": true,
+    "_file": "actuators/neopixel_ext_effect_play.md",
+    "doc": "# LED-Streifen – Effekt abspielen\n\nStartet einen Effekt (Komet, Lauflicht, Blinken, Pulsieren oder Regenbogen). Nach der gewählten Anzahl geht der Streifen aus.\nDer Block wartet nicht: Das Programm läuft sofort weiter, und mehrere Streifen können gleichzeitig leuchten.\nLäuft derselbe Effekt schon, fängt er nicht von vorne an. Regenbogen benutzt seine eigenen Farben.\n\nBraucht `led_effekte.py` und `adafruit_led_animation` auf dem Board („Libs prüfen“).",
+    "doc_en": "# LED strip – play effect\n\nStarts an effect (comet, chase, blink, pulse or rainbow). After the chosen number of times the strip turns off.\nThe block does not wait: the program continues right away, and several strips can light up at the same time.\nIf the same effect is already running, it does not start over. Rainbow uses its own colours.\n\nNeeds `led_effekte.py` and `adafruit_led_animation` on the board (“Check libs”)."
+  },
+  {
+    "id": "neopixel_ext_effect_stop",
+    "blockCategory": "Lichter",
+    "component": "neopixel_strip",
+    "subCategory": "Streifen",
+    "label": "Streifen-Effekt stoppen",
+    "label_en": "Stop strip effect",
+    "colour": "#EC4899",
+    "tooltip": "Beendet den Effekt auf dem LED-Streifen und schaltet ihn aus.",
+    "tooltip_en": "Ends the effect on the LED strip and turns it off.",
+    "blockType": "statement",
+    "inline": true,
+    "inputs": [
+      {
+        "label": "Effekt stoppen  Port:",
+        "label_en": "stop effect  port:",
+        "name": "PORT",
+        "fieldType": "grove_dropdown",
+        "groveRole": "strip"
+      }
+    ],
+    "valueInputs": [
+      {
+        "name": "COUNT",
+        "label": "LEDs gesamt",
+        "label_en": "total LEDs",
+        "check": "Number",
+        "defaultValue": 20
+      }
+    ],
+    "hardware": {
+      "commonName": "NeoPixel-Streifen (extern) / WS2812B",
+      "verbrauch3j": 0,
+      "kitStandard": false
+    },
+    "legacyGenerator": true,
+    "_file": "actuators/neopixel_ext_effect_stop.md",
+    "doc": "# LED-Streifen – Effekt stoppen\n\nBeendet den laufenden Effekt und schaltet den Streifen aus.",
+    "doc_en": "# LED strip – stop effect\n\nEnds the running effect and turns the strip off."
+  },
+  {
     "id": "neopixel_ext_fill",
     "blockCategory": "Lichter",
     "component": "neopixel_strip",
@@ -2755,7 +3020,7 @@ const BLOCKS_DB = [
         "label_en": "fill  port:",
         "name": "PORT",
         "fieldType": "grove_dropdown",
-        "groveRole": "digital"
+        "groveRole": "strip"
       },
       {
         "label": "Farbe:",
@@ -2802,7 +3067,7 @@ const BLOCKS_DB = [
         "label_en": "off  port:",
         "name": "PORT",
         "fieldType": "grove_dropdown",
-        "groveRole": "digital"
+        "groveRole": "strip"
       }
     ],
     "valueInputs": [
@@ -2842,7 +3107,7 @@ const BLOCKS_DB = [
         "label_en": "port:",
         "name": "PORT",
         "fieldType": "grove_dropdown",
-        "groveRole": "digital"
+        "groveRole": "strip"
       },
       {
         "label": "Farbe:",
