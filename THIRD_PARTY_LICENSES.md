@@ -18,7 +18,7 @@ eigenen Lizenzen; die Volltexte liegen in [`LICENSES/`](LICENSES/).
 | Bestandteil | Pfad | Urheber | Lizenz |
 |---|---|---|---|
 | CircuitPython (Firmware) | `firmware/*.uf2`, `firmware/*.bin` | Damien P. George, Adafruit Industries und Mitwirkende | [MIT](LICENSES/MIT.txt) |
-| Adafruit CircuitPython-Bibliotheken: `adafruit_bus_device`, `adafruit_display_text`, `adafruit_motor`, `adafruit_register`, `adafruit_dht`, `adafruit_icm20x`, `adafruit_ticks`, `asyncio`, `neopixel` | `lib/` | Adafruit Industries und Mitwirkende | [MIT](LICENSES/MIT.txt) |
+| Adafruit CircuitPython-Bibliotheken: `adafruit_bus_device`, `adafruit_display_text`, `adafruit_motor`, `adafruit_register`, `adafruit_dht`, `adafruit_icm20x`, `adafruit_led_animation`, `adafruit_ticks`, `asyncio`, `neopixel` | `lib/` | Adafruit Industries und Mitwirkende | [MIT](LICENSES/MIT.txt) |
 | TM1637-Treiber (kompiliert) | `lib/tm1637_display.mpy` | unbekannt | Herkunft noch zu klären |
 
 Die Copyright-Hinweise der einzelnen Autoren stehen in den jeweiligen

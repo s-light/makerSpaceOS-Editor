@@ -1,8 +1,8 @@
 // GENERIERT von scripts/build_lib_manifest.js – NICHT MANUELL BEARBEITEN!
-// Generiert am 2026-11-25T21:45:17.938Z aus lib/ (44 Dateien).
+// Generiert am 2026-11-26T10:41:47.650Z aus lib/ (55 Dateien).
 window.LIB_MANIFEST = {
-  generatedAt: "2026-11-25T21:45:17.938Z",
-  libVersion: "1ee55a7ca32deec54ee8db5e2932e5ada6409ba253e2d51c25fa720b1375d92e",
+  generatedAt: "2026-11-26T10:41:47.650Z",
+  libVersion: "edf5ccb2ad85bf6964c907ac551a49824d6eb91af762fcba55854bc8e00b9803",
   files: [
     {
       "path": "adafruit_bus_device/__init__.py",
@@ -43,6 +43,56 @@ window.LIB_MANIFEST = {
       "path": "adafruit_icm20x.mpy",
       "size": 8361,
       "sha256": "48b35e9caea575ad43cf1aa83133c8f22299e61ef6c9f7e03cf348dbcdf7bae6"
+    },
+    {
+      "path": "adafruit_led_animation/__init__.mpy",
+      "size": 289,
+      "sha256": "a909534d24a0a359ef6a76819d3c54d9bb718e0afa56b626b32400c137ffb0c7"
+    },
+    {
+      "path": "adafruit_led_animation/animation/__init__.mpy",
+      "size": 1547,
+      "sha256": "7a018d6749c21e583a66eb64209bfbeed4e624ce17e74956687d9a9401b30972"
+    },
+    {
+      "path": "adafruit_led_animation/animation/blink.mpy",
+      "size": 402,
+      "sha256": "272c4f7efd27919f27a9a85a4e038ff8a5df537ac875e5d77bee43c53134c1da"
+    },
+    {
+      "path": "adafruit_led_animation/animation/chase.mpy",
+      "size": 1137,
+      "sha256": "e8804f9e57ecabb2651c7684f6f41c56472574e78c48d3307f8631016958740a"
+    },
+    {
+      "path": "adafruit_led_animation/animation/colorcycle.mpy",
+      "size": 598,
+      "sha256": "b94574b7fdb1c24cb2830ea07d92c1d240f98e1e17a2fd119c22383c4b00a839"
+    },
+    {
+      "path": "adafruit_led_animation/animation/comet.mpy",
+      "size": 1347,
+      "sha256": "c3ee6c39743f946a2240e261334954da99f8371eb7bcd4eff2a288c86e6da56c"
+    },
+    {
+      "path": "adafruit_led_animation/animation/pulse.mpy",
+      "size": 680,
+      "sha256": "4eead0aebc8ecd9ab83e1e0d6493e13ed9144e3da965af3c8666c51b7471e6f0"
+    },
+    {
+      "path": "adafruit_led_animation/animation/rainbow.mpy",
+      "size": 1356,
+      "sha256": "65cf379a25b3d132b572dd7a4b71fbc2d624e01d56721daadc3556880737e0a6"
+    },
+    {
+      "path": "adafruit_led_animation/color.mpy",
+      "size": 1000,
+      "sha256": "bddf3507aa1301d0ca11b3d2c31b1957f29ecfd76eb8d3ebb579b242f90f9c9b"
+    },
+    {
+      "path": "adafruit_led_animation/pulse_generator.mpy",
+      "size": 483,
+      "sha256": "5a263c8bf4a6d52f5ad7d359ff56643c1595c79b4065f2e4872051d9d2040c9c"
     },
     {
       "path": "adafruit_motor/__init__.mpy",
@@ -183,6 +233,11 @@ window.LIB_MANIFEST = {
       "path": "ina226.py",
       "size": 2284,
       "sha256": "ba074d22fe06033886afccc5f64a9d167fdbec4f7059415883413a28f2608294"
+    },
+    {
+      "path": "led_effekte.py",
+      "size": 3779,
+      "sha256": "48b01e77b77486cd0e566612bf235f70f92979b0a37c678fff3a3d4f9d2510ec"
     },
     {
       "path": "lichtschranke.py",

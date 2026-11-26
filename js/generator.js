@@ -82,7 +82,9 @@ Blockly.Python.finish = function() {
     _akkuDefs();
     _defs['from_robobuddy_waechter'] = 'from robobuddy import akku_waechter';
   }
-  const hasAsync = guard || _tasks.length > 0 || /\bawait\b/.test(_setupCode);
+  // LED-Effekte laufen als Hintergrund-Aufgabe → immer über start()
+  const hasAsync = guard || _tasks.length > 0 || !!_defs['init_effekte'] ||
+                   /\bawait\b/.test(_setupCode);
   if (hasAsync) _defs['import_asyncio'] = 'import asyncio';
 
   // Import-Einträge aus Standard-Blockly-Blöcken übernehmen (z.B. math_random_int →
@@ -696,32 +698,84 @@ Blockly.Python['neopixel_off'] = function(_block) {
 // Externer NeoPixel-Streifen am Grove-Port (Signal-Pin + Anzahl LEDs).
 // Variablenname enthält den Pin → mehrere Streifen an verschiedenen Ports möglich.
 function _neopixelExtDefs(pin, count) {
+  // Streifen am Servo-Anschluss hängt an dessen Plus (RoboBuddy: geschaltet)
+  if (Object.values(BOARD.servos || {}).includes(pin)) _servoPowerDef();
   _defs['import_board']    = 'import board';
   _defs['import_neopixel'] = 'import neopixel';
   _defs[`init_npx_${pin}`] =
     `_npx_${pin} = neopixel.NeoPixel(board.${pin}, ${count}, brightness=0.3, auto_write=False)`;
 }
 
+// Effekte (lib/led_effekte.py) laufen im Hintergrund weiter. Setzt ein anderer
+// Block denselben Streifen, muss der Effekt vorher enden, sonst übermalt er ihn.
+function _effectDefs() {
+  _defs['from_led_effekte'] = 'from led_effekte import effekte_einrichten, effekt_start, effekt_stopp';
+  _defs['init_effekte']     = 'effekte_einrichten()';
+}
+
+function _effectStopLine(block, pin) {
+  const hasEffect = block.workspace.getAllBlocks(false).some(b =>
+    b.type.startsWith('neopixel_ext_effect_') && b.isEnabled() && b.getFieldValue('PORT') === pin);
+  if (!hasEffect) return '';
+  _effectDefs();
+  return `effekt_stopp(_npx_${pin})\n`;
+}
+
+// Gemeinsamer Anfang der Effekt-Blöcke: Port prüfen, Streifen anlegen
+function _effectStrip(block) {
+  const pin = block.getFieldValue('PORT');
+  if (!pin || pin === '__NONE__') {
+    block.setWarningText(L('⚠ Bitte Port auswählen!', '⚠ Please select a port!'));
+    return null;
+  }
+  block.setWarningText(null);
+  const count = Blockly.Python.valueToCode(block, 'COUNT', Blockly.Python.ORDER_NONE) || '20';
+  _neopixelExtDefs(pin, count);
+  _effectDefs();
+  return `_npx_${pin}`;
+}
+
+function _effectStart(block, times) {
+  const strip = _effectStrip(block);
+  if (!strip) return L('pass  # ⚠ Kein Port ausgewählt\n', 'pass  # ⚠ No port selected\n');
+  const rgb = hexToRgbTuple(block.getFieldValue('COLOR'));
+  return `effekt_start(${strip}, "${block.getFieldValue('EFFECT')}", ${rgb}, ${block.getFieldValue('SPEED')}${times})\n`;
+}
+
+Blockly.Python['neopixel_ext_effect_play'] = function(block) {
+  const times = Blockly.Python.valueToCode(block, 'TIMES', Blockly.Python.ORDER_NONE) || '1';
+  return _effectStart(block, `, ${times}`);
+};
+
+Blockly.Python['neopixel_ext_effect_forever'] = function(block) {
+  return _effectStart(block, '');
+};
+
+Blockly.Python['neopixel_ext_effect_stop'] = function(block) {
+  const strip = _effectStrip(block);
+  return strip ? `effekt_stopp(${strip})\n` : L('pass  # ⚠ Kein Port ausgewählt\n', 'pass  # ⚠ No port selected\n');
+};
+
 Blockly.Python['neopixel_ext_set'] = function(block) {
   const pin = block.getFieldValue('PORT');
   const count = Blockly.Python.valueToCode(block, 'COUNT', Blockly.Python.ORDER_NONE) || '8';
   _neopixelExtDefs(pin, count);
   const idx = Blockly.Python.valueToCode(block, 'INDEX', Blockly.Python.ORDER_NONE) || '1';
-  return `_npx_${pin}[(${idx}) - 1] = ${hexToRgbTuple(block.getFieldValue('COLOR'))}\n_npx_${pin}.show()\n`;
+  return _effectStopLine(block, pin) + `_npx_${pin}[(${idx}) - 1] = ${hexToRgbTuple(block.getFieldValue('COLOR'))}\n_npx_${pin}.show()\n`;
 };
 
 Blockly.Python['neopixel_ext_fill'] = function(block) {
   const pin = block.getFieldValue('PORT');
   const count = Blockly.Python.valueToCode(block, 'COUNT', Blockly.Python.ORDER_NONE) || '8';
   _neopixelExtDefs(pin, count);
-  return `_npx_${pin}.fill(${hexToRgbTuple(block.getFieldValue('COLOR'))})\n_npx_${pin}.show()\n`;
+  return _effectStopLine(block, pin) + `_npx_${pin}.fill(${hexToRgbTuple(block.getFieldValue('COLOR'))})\n_npx_${pin}.show()\n`;
 };
 
 Blockly.Python['neopixel_ext_off'] = function(block) {
   const pin = block.getFieldValue('PORT');
   const count = Blockly.Python.valueToCode(block, 'COUNT', Blockly.Python.ORDER_NONE) || '8';
   _neopixelExtDefs(pin, count);
-  return `_npx_${pin}.fill((0, 0, 0))\n_npx_${pin}.show()\n`;
+  return _effectStopLine(block, pin) + `_npx_${pin}.fill((0, 0, 0))\n_npx_${pin}.show()\n`;
 };
 
 Blockly.Python['neopixel_brightness'] = function(block) {

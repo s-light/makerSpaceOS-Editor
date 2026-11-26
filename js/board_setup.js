@@ -459,6 +459,7 @@ async function _reconnectSerial(timeoutMs) {
 const BS_LIB_DEPS = {
   makerspaceos:          ['asyncio'],
   asyncio:               ['adafruit_ticks'],
+  led_effekte:           ['makerspaceos', 'asyncio', 'adafruit_led_animation'],
   adafruit_display_text: ['adafruit_ticks'],
   adafruit_icm20x:       ['adafruit_bus_device', 'adafruit_register'],
   grove_imu:             ['adafruit_icm20x'],

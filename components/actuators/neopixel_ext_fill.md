@@ -15,7 +15,7 @@ inputs:
     label_en: "fill  port:"
     name: PORT
     fieldType: grove_dropdown
-    groveRole: digital
+    groveRole: strip
   - label: "Farbe:"
     label_en: "Colour:"
     name: COLOR

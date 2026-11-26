@@ -1172,10 +1172,12 @@ function docsPick(obj, field, isEn) {
 }
 
 const GROVE_ROLE_LABELS_DE = {
+  strip: 'Grove-Port oder Servo-Anschluss',
   digital: 'digitaler Grove-Port', analog: 'analoger Grove-Port',
   i2c: 'I2C-Port', '2pin': 'Grove-Port (beide Pins)',
 };
 const GROVE_ROLE_LABELS_EN = {
+  strip: 'Grove or servo port',
   digital: 'digital Grove port', analog: 'analog Grove port',
   i2c: 'I2C port', '2pin': 'Grove port (both pins)',
 };

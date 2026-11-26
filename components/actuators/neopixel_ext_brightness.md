@@ -15,7 +15,7 @@ inputs:
     label_en: "brightness  port:"
     name: PORT
     fieldType: grove_dropdown
-    groveRole: digital
+    groveRole: strip
 valueInputs:
   - name: COUNT
     label: "LEDs gesamt"
